@@ -34,6 +34,7 @@ import (
 	"github.com/autobrr/qui/internal/models"
 	"github.com/autobrr/qui/internal/polar"
 	"github.com/autobrr/qui/internal/qbittorrent"
+	"github.com/autobrr/qui/internal/schema"
 	"github.com/autobrr/qui/internal/services/arr"
 	"github.com/autobrr/qui/internal/services/automations"
 	"github.com/autobrr/qui/internal/services/crossseed"
@@ -74,6 +75,7 @@ multiple qBittorrent instances with support for 10k+ torrents.`,
 	rootCmd.AddCommand(RunCreateUserCommand())
 	rootCmd.AddCommand(RunChangePasswordCommand())
 	rootCmd.AddCommand(RunUpdateCommand())
+	rootCmd.AddCommand(RunExportSchemaCommand())
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -401,6 +403,41 @@ func RunUpdateCommand() *cobra.Command {
 Flags:
 {{.LocalFlags.FlagUsages | trimTrailingWhitespaces}}
 `)
+
+	return command
+}
+
+func RunExportSchemaCommand() *cobra.Command {
+	var output string
+
+	command := &cobra.Command{
+		Use:   "generate-schema",
+		Short: "Generate configuration schema",
+		Long:  "Generate configuration JSON schema for validation and autocompletion.",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			var (
+				writer = cmd.OutOrStdout()
+				closer func() error
+			)
+
+			if output != "" {
+				f, err := os.Create(output)
+				if err != nil {
+					return fmt.Errorf("failed to create schema file: %w", err)
+				}
+
+				writer = f
+				closer = f.Close
+			}
+
+			if closer != nil {
+				defer closer()
+			}
+
+			return schema.ExportSchema(writer)
+		},
+	}
+	command.Flags().StringVar(&output, "output", "", "output file path")
 
 	return command
 }

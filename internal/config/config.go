@@ -25,6 +25,7 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/autobrr/qui/internal/domain"
+	"github.com/autobrr/qui/internal/schema"
 )
 
 var envPrefix = "QUI__"
@@ -449,7 +450,9 @@ func (c *AppConfig) writeDefaultConfig(path string) error {
 	log.Debug().Msgf("Created config directory: %s", dir)
 
 	// Create config template
-	configTemplate := `# config.toml - Auto-generated on first run
+	configTemplate := `#:schema https://getqui.com/{{ .siteConfigSchemaPath }}
+
+# config.toml - Auto-generated on first run
 
 # Hostname / IP
 # Default: "localhost" (or "0.0.0.0" in containers)
@@ -586,12 +589,13 @@ logLevel = "{{ .logLevel }}"
 
 	// Prepare template data
 	data := map[string]any{
-		"host":          c.viper.GetString("host"),
-		"port":          c.viper.GetInt("port"),
-		"sessionSecret": c.viper.GetString("sessionSecret"),
-		"logLevel":      c.viper.GetString("logLevel"),
-		"logMaxSize":    c.viper.GetInt("logMaxSize"),
-		"logMaxBackups": c.viper.GetInt("logMaxBackups"),
+		"host":                 c.viper.GetString("host"),
+		"port":                 c.viper.GetInt("port"),
+		"sessionSecret":        c.viper.GetString("sessionSecret"),
+		"logLevel":             c.viper.GetString("logLevel"),
+		"logMaxSize":           c.viper.GetInt("logMaxSize"),
+		"logMaxBackups":        c.viper.GetInt("logMaxBackups"),
+		"siteConfigSchemaPath": schema.SiteConfigSchemaPath,
 	}
 
 	// Parse and execute template

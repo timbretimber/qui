@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/autobrr/qui/internal/domain/config",
+  "$ref": "#/$defs/Config",
+  "$defs": {
+    "Config": {
+      "properties": {
+        "Version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer"
+        },
+        "baseUrl": {
+          "type": "string"
+        },
+        "corsAllowedOrigins": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sessionSecret": {
+          "type": "string"
+        },
+        "logLevel": {
+          "type": "string"
+        },
+        "logPath": {
+          "type": "string"
+        },
+        "logMaxSize": {
+          "type": "integer"
+        },
+        "logMaxBackups": {
+          "type": "integer"
+        },
+        "dataDir": {
+          "type": "string"
+        },
+        "databaseEngine": {
+          "type": "string"
+        },
+        "databaseDsn": {
+          "type": "string"
+        },
+        "databaseHost": {
+          "type": "string"
+        },
+        "databasePort": {
+          "type": "integer"
+        },
+        "databaseUser": {
+          "type": "string"
+        },
+        "databasePassword": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "databaseSSLMode": {
+          "type": "string"
+        },
+        "databaseConnectTimeout": {
+          "type": "integer"
+        },
+        "databaseMaxOpenConns": {
+          "type": "integer"
+        },
+        "databaseMaxIdleConns": {
+          "type": "integer"
+        },
+        "databaseConnMaxLifetime": {
+          "type": "integer"
+        },
+        "checkForUpdates": {
+          "type": "boolean"
+        },
+        "pprofEnabled": {
+          "type": "boolean"
+        },
+        "metricsEnabled": {
+          "type": "boolean"
+        },
+        "metricsHost": {
+          "type": "string"
+        },
+        "metricsPort": {
+          "type": "integer"
+        },
+        "metricsBasicAuthUsers": {
+          "type": "string"
+        },
+        "trackerIconsFetchEnabled": {
+          "type": "boolean"
+        },
+        "externalProgramAllowList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "crossSeedRecoverErroredTorrents": {
+          "type": "boolean"
+        },
+        "authDisabled": {
+          "type": "boolean"
+        },
+        "I_ACKNOWLEDGE_THIS_IS_A_BAD_IDEA": {
+          "type": "boolean"
+        },
+        "authDisabledAllowedCIDRs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "oidcEnabled": {
+          "type": "boolean"
+        },
+        "oidcIssuer": {
+          "type": "string"
+        },
+        "oidcClientId": {
+          "type": "string"
+        },
+        "oidcClientSecret": {
+          "type": "string"
+        },
+        "oidcRedirectUrl": {
+          "type": "string"
+        },
+        "oidcDisableBuiltInLogin": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    }
+  }
+}

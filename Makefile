@@ -224,6 +224,11 @@ docs-build:
 	@echo "Building documentation..."
 	cd documentation && pnpm build
 
+# Update schema
+schema-gen:
+	@echo "Generating schema..."
+	go run ./cmd/gen-schema
+
 # Help
 help:
 	@echo "Available targets:"
@@ -263,6 +268,7 @@ help:
 	@echo "Other:"
 	@echo "  make themes-fetch   - Fetch premium themes from private repository"
 	@echo "  make themes-clean   - Clean premium themes"
+	@echo "  make schema-gen     - Generate config schema"
 	@echo "  make clean          - Clean build artifacts"
 	@echo "  make deps           - Install dependencies"
 	@echo "  make help           - Show this help message"

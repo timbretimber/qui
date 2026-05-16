@@ -70,7 +70,7 @@ export default defineConfig(() => ({
           },
         ],
       },
-      includeAssets: ["favicon.png", "apple-touch-icon.png"],
+      includeAssets: ["favicon.png", "apple-touch-icon.png", "config.schema.json"],
       manifest: {
         name: "qui",
         short_name: "qui",
